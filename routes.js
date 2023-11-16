@@ -10,11 +10,17 @@ const fs = require("fs").promises;
 
 
 
-// Insert a contact into the database route
+// Insert a manga into directory
 router.post("/add_manga", async (req, res) => {
     try {
+        if  (!req.body.name || !req.body.chapters || !req.body.finished) {
+            return res.status(400).json({
+                message: "Name, Chapters, and Finished are required fields",
+                type: "danger",
+            });
+        }
         const user = new User({
-            manga: req.body.name,
+            manga: req.body.manga,
             chapters: req.body.chapters,
             finished: req.body.finished,
         });
@@ -32,7 +38,7 @@ router.post("/add_manga", async (req, res) => {
 });
 
 
-// Get all users route
+// Get all route
 router.get("/", async (req, res) => {
     try {
         const users = await User.find().exec();
@@ -51,7 +57,7 @@ router.get("/add_manga", (req, res) => {
 });
 
 
-// Edit an user route
+// Edit route
 router.get("/edit_manga", async (req, res) => {
     let id = req.params.id;
     try {
@@ -69,7 +75,7 @@ router.get("/edit_manga", async (req, res) => {
 });
 
 
-// Update user route
+// Update route
 router.post("/update/:id", async (req, res) => {
     try {
         const id = req.params.id;
@@ -92,7 +98,7 @@ router.post("/update/:id", async (req, res) => {
 });
 
 
-// Delete user route
+// Delete route
 router.get("/delete/:id", async (req, res) => {
     let id = req.params.id;
     try {
