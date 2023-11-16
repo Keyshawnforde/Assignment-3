@@ -14,17 +14,16 @@ const fs = require("fs").promises;
 router.post("/add_manga", async (req, res) => {
     try {
         const user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            image: req.file.filename,
+            manga: req.body.name,
+            chapters: req.body.chapters,
+            finished: req.body.finished,
         });
 
 
         await user.save();
         req.session.message = {
             type: "success",
-            message: "Contact added successfully!!!!",
+            message: "Manga added successfully",
         };
         res.redirect("/");
     } catch (err) {
@@ -74,23 +73,11 @@ router.get("/edit_manga", async (req, res) => {
 router.post("/update/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        let newImage = req.body.old_image;
-
-
-        if (req.file) {
-            newImage = req.file.filename;
-            try {
-                await fs.unlink(`./uploads/${req.body.old_image}`);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
 
         await User.findByIdAndUpdate(id, {
-            Manga: req.body.name,
-           Chapters : req.body.email,
-            Finished: req.body.phone,
+            manga: req.body.name,
+           chapters : req.body.chapters,
+            finished: req.body.finished,
         });
 
 
@@ -109,17 +96,6 @@ router.post("/update/:id", async (req, res) => {
 router.get("/delete/:id", async (req, res) => {
     let id = req.params.id;
     try {
-        const result = await User.findByIdAndDelete(id);
-
-
-        if (result.image !== "") {
-            try {
-                await fs.unlink(`./uploads/${result.image}`);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
 
         req.session.message = {
             type: "info",
@@ -131,17 +107,6 @@ router.get("/delete/:id", async (req, res) => {
     }
 });
 
-
-// Contact Me route
-router.get("/manga", (req, res) => {
-    res.render("manga", { title: "Manga Name" });
-});
-
-
-router.post("/manga", (req, res) => {
-    // Handle the form submission here if needed
-    res.redirect("/manga");
-});
 
 
 module.exports = router;

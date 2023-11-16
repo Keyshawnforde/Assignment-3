@@ -15,26 +15,13 @@
               <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter Manga Name" value="<%= user.name %>" required />
             </div>
             <div class="mb-3">
-              <label for="Chapters">Manga Chapters</label>
+              <label for="Chapters">Chapters</label>
               <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter Manga Chapters" value="<%= user.email %>" required />
             </div>
             <div class="mb-3">
               <label for="Finished">Finished</label>
               <input type="tel" name="phone" class="form-control form-control-lg" placeholder="Enter If You Hve Finished The Manga or Not" value="<%= user.phone %>" required />
             </div>
-
-
-            <div class="mb-3">
-              <label for="image" class="form-label">Select Image</label>
-              <input class="form-control form-control-lg" type="file" name="image" />
-              <img src="/<%= user.image %>" width="100" class="img-thumbnail mt-1">
-            </div>
-            <input type="hidden" name="old_image" value="<%= user.image %>">
-            <div class="mb-3 d-grid">
-              <input type="submit" name="submit" value="Update Manga" class="btn btn-success btn-lg" />
-            </div>
-
-
           </form>
         </div>
       </div>

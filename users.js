@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
-    Manga: {
+    manga: {
         type: String,
         required: true,
     },
-    Chapters: {
+    chapters: {
         type: String,
         required: true,
     },
-    Finished: {
+    finished: {
         type: String,
         required: true,
     },
