@@ -3,17 +3,17 @@
 
 const express = require("express");
 const router = express.Router();
-const Manga = require("../models/users");
+const User = require("../models/users");
+const multer = require("multer");
 const fs = require("fs").promises;
 
 
 
 
-
 // Insert a contact into the database route
-router.post("/add", upload, async (req, res) => {
+router.post("/add_manga", async (req, res) => {
     try {
-        const user = new Manga({
+        const user = new User({
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
@@ -47,13 +47,13 @@ router.get("/", async (req, res) => {
 });
 
 
-router.get("/add", (req, res) => {
+router.get("/add_manga", (req, res) => {
     res.render("add_manga", { title: "Add Manga Name" });
 });
 
 
 // Edit an user route
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit_manga", async (req, res) => {
     let id = req.params.id;
     try {
         const user = await User.findById(id);
@@ -71,7 +71,7 @@ router.get("/edit/:id", async (req, res) => {
 
 
 // Update user route
-router.post("/update/:id", upload, async (req, res) => {
+router.post("/update/:id", async (req, res) => {
     try {
         const id = req.params.id;
         let newImage = req.body.old_image;
@@ -89,8 +89,8 @@ router.post("/update/:id", upload, async (req, res) => {
 
         await User.findByIdAndUpdate(id, {
             Manga: req.body.name,
-           Chapters : req.body.Chapters,
-            Finished: req.body.Finished,
+           Chapters : req.body.email,
+            Finished: req.body.phone,
         });
 
 
