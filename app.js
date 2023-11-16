@@ -1,55 +1,56 @@
-// app.js
+// imports
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('./conf');
-const Item = require('./models/item');
+const session = require('express-session');
+
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 
-// MongoDB Connection
-mongoose.connect(config.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+// database connection
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on("error", (error) => console.log(error));
+db.once("open", ()=> console.log("Connected to the database!"));
 
-// Define a Mongoose Schema and Model
-const itemSchema = new mongoose.Schema({
-  name: String,
-  description: String,
+
+// middlewares
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+
+app.use(
+  session({
+    secret: 'my secret key',
+    saveUninitialized: true,
+    resave: false
+  })
+);
+
+
+app.use((req, res, next) => {
+    res.locals.message = req.session.message;
+    delete req.session.message;
+    next();
 });
 
-const Item = mongoose.model('Item', itemSchema);
 
-// Express Routes
-app.get('/', (req, res) => {
-  res.send('Hello, Express!');
-});
+app.use(express.static("uploads"));
+app.use(express.static("public"));
 
-// Route to retrieve all items from MongoDB
-app.get('/items', async (req, res) => {
-  try {
-    const items = await Item.find();
-    res.json(items);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
-// Route to add a new item to MongoDB
-app.post('/items', async (req, res) => {
-  try {
-    const newItem = await Item.create(req.body);
-    res.status(201).json(newItem);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// set template engine
+app.set('view engine', 'ejs');
+
+
+
+
+// route prefix
+app.use("", require("./routes/routes"));
+
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server started at http://localhost:${PORT}`);
 });
-

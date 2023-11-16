@@ -1,0 +1,44 @@
+<!-- contact.ejs -->
+
+
+<%- include('layout/header') %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mx-auto mt-4">
+      <div class="card shadow">
+        <div class="card-header bg-info">
+          <h3 class="text-light">Contact Me</h3>
+        </div>
+        <div class="card-body p-4">
+          <p>
+            Feel free to get in touch with me. You can reach out via email or through the form below.
+          </p>
+          <p>Email: <a href="keyshawn.forde@ontariotechu.net">keyshawn.forde@ontariotechu.net</a></p>
+
+
+          <!-- Add a simple contact form -->
+          <form action="/contact" method="post">
+            <div class="mb-3">
+              <label for="name">Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required />
+            </div>
+            <div class="mb-3">
+              <label for="message">Message</label>
+              <textarea name="message" class="form-control" placeholder="Your Message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-info">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%- include('layout/footer') %>
