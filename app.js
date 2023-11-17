@@ -52,7 +52,7 @@ app.post('/add_manga', async (req, res) => {
 
     // Validate the inputs if needed
 
-    // Create a new Manga instance and save it to the database
+    // Create a new Manga instance and save it to the directory
     const newManga = new Manga({ name: MangaName, volumes: Volumes, finished: Finished });
     await newManga.save();
 

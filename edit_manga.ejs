@@ -1,27 +1,31 @@
 <%- include('layout/header') %>
 
-
 <div class="container">
   <div class="row">
     <div class="col-12 mx-auto mt-4">
       <div class="card shadow">
         <div class="card-header bg-success">
-          <!--Edits manga name-->
+          <!-- Edits manga name -->
           <h3 class="text-light">Edit Manga (<%= user.name %>)</h3>
         </div>
         <div class="card-body p-4">
-          <form action="/update/<%= user._id %>" method="post" id="add-form" enctype="multipart/form-data">
+          <form action="/update/<%= user._id %>" method="post" id="edit-form" enctype="multipart/form-data">
             <div class="mb-3">
-              <label for="Manga Name">Manga Name</label>
+              <label for="MangaName">Manga Name</label>
               <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter Manga Name" value="<%= user.manga %>" required />
             </div>
             <div class="mb-3">
-              <label for="Chapters">Volumes</label>
+              <!--Volume name-->
+              <label for="Volumes">Volumes</label>
               <input type="text" name="volumes" class="form-control form-control-lg" placeholder="Enter Volumes" value="<%= user.chapters %>" required />
             </div>
             <div class="mb-3">
               <label for="Finished">Finished</label>
               <input type="text" name="finished" class="form-control form-control-lg" placeholder="Enter If You Have Finished The Manga or Not" value="<%= user.finished %>" required />
+            </div>
+            <div class="mb-4 d-grid">
+              <!--Updates the manga-->
+              <input type="submit" name="submit" value="Update Manga" class="btn btn-success btn-lg" />
             </div>
           </form>
         </div>
@@ -29,6 +33,5 @@
     </div>  
   </div>
 </div>
-
 
 <%- include('layout/footer') %>

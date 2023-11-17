@@ -1,29 +1,25 @@
 // routes.js
 
-
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
-const fs = require("fs").promises;
 
-
-
-
+// Insert a manga into directory
 // Insert a manga into directory
 router.post("/add_manga", async (req, res) => {
     try {
-        if  (!req.body.name || !req.body.chapters || !req.body.finished) {
+        if (!req.body.manga || !req.body.volumes || req.body.finished == null) {
             return res.status(400).json({
-                message: "Name, Chapters, and Finished are required fields",
+                message: "Manga Name, Volumes, and Finished are required fields",
                 type: "danger",
             });
         }
+
         const user = new User({
             manga: req.body.manga,
-            chapters: req.body.chapters,
+            volumes: req.body.volumes,
             finished: req.body.finished,
         });
-
 
         await user.save();
         req.session.message = {
@@ -35,7 +31,6 @@ router.post("/add_manga", async (req, res) => {
         res.status(500).json({ message: err.message, type: "danger" });
     }
 });
-
 
 // Get all route
 router.get("/", async (req, res) => {
@@ -80,9 +75,9 @@ router.post("/update/:id", async (req, res) => {
         const id = req.params.id;
 
         await User.findByIdAndUpdate(id, {
-            manga: req.body.name,
-           chapters : req.body.chapters,
-            finished: req.body.finished,
+            manga: req.body.MangaName,
+            volumes: req.body.Volumes,
+            finished: req.body.Finished,
         });
 
 

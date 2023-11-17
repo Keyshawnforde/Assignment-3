@@ -24,6 +24,7 @@
                     <tbody>
                         <% users.forEach((row, index) => { %>
                             <tr class="align-middle">
+                                <!--Rows-->
                                 <td><%= index + 1 %></td>
                                 <td><%= row.Manga %></td>
                                 <td><%= row.Volumes %></td>
@@ -37,6 +38,7 @@
                     </tbody>
                 </table>
             <% } else { %>
+                <!--Tells the user there is no manga in the directory-->
                 <h1 class="text-center text-secondary mt-5">No Manga found in directory</h1>
             <% } %>
         </div>
