@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const bodyParser = require('body-parser'); // Added for parsing form data
 
 // Assuming you have a Manga model in models/manga.js
 const Manga = require('./models/manga');
@@ -14,17 +13,20 @@ const PORT = process.env.PORT || 5000;
 // directory connection
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
-db.on("error", (error) => console.log(error));
+
+db.on("error", (error) => console.error("MongoDB connection error:", error));
 db.once("open", () => console.log("Connected to directory!"));
 
 // middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true })); // Added for parsing form data
+
+// Commented out body-parser as it's included by default in modern Express versions
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: 'my secret key',
+    secret: process.env.SESSION_SECRET || 'my-secret-key', // Store session secret in an environment variable
     saveUninitialized: true,
     resave: false
   })
