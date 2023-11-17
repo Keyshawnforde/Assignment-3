@@ -16,27 +16,28 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Manga Name</th>
-                            <th>Manga Chapters</th>
+                            <th>Volumes</th>
                             <th>Finished</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% users.forEach((row, index) => { %>
                             <tr class="align-middle">
-                                <td><%= index %></td>
+                                <td><%= index + 1 %></td>
                                 <td><%= row.Manga %></td>
-                                <td><%= row.Chapters %></td>
+                                <td><%= row.Volumes %></td>
                                 <td><%= row.Finished %></td>
                                 <td>
                                     <a href="/edit/<%= row._id %>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="/delete/<%= row._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                    <a href="/delete/<%= row._id %>" class="btn btn-danger btn-sm"><i class="fas fa-delete"></i> Delete</a>
                                 </td>
                             </tr>
                         <% }) %>
                     </tbody>
                 </table>
             <% } else { %>
-                <h1 class="text-center text-secondary mt-5">No Manga found in diretory</h1>
+                <h1 class="text-center text-secondary mt-5">No Manga found in directory</h1>
             <% } %>
         </div>
     </div>

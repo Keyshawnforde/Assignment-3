@@ -1,35 +1,35 @@
 <%- include('layout/header') %>
+
 <div class="container">
-  <div class="row">
-    <div class="col-12 mx-auto mt-4">
-      <div class="card shadow">
-        <div class="card-header bg-primary">
-          <h3 class="text-light">Add New Manga</h3>
+    <div class="row">
+        <div class="col-12 mx-auto mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary">
+                    <h3 class="text-light">Add New Manga</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/add_manga" method="post" id="add-form" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="MangaName">Manga Name</label>
+                            <input type="text" name="MangaName" class="form-control form-control-lg" placeholder="Enter Manga Name" required />
+                        </div>
+                        <div class="mb-4">
+                            <label for="Volumes">Volumes</label>
+                            <input type="text" name="Volumes" class="form-control form-control-lg" placeholder="Enter Volumes" required />
+                        </div>
+                        <div class="mb-4">
+                            <label for="Finished">Finished</label>
+                            <input type="text" name="Finished" class="form-control form-control-lg" placeholder="Enter If You Have Finished or Not" required />
+                        </div>
+
+                        <div class="mb-4 d-grid">
+                            <input type="submit" name="submit" value="Add Manga" class="btn btn-primary btn-lg" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="card-body p-4">
-          <form action="/add_manga" method="post" id="add-form" enctype="multipart/form-data">
-            <div class="mb-3">
-              <label for="name">Manga Name</label>
-              <input type="text" name="Manga Name" class="form-control form-control-lg" placeholder="Enter Manga Name" required />
-            </div>
-            <div class="mb-4">
-              <label for="Manga Chapters">Chapters</label>
-              <input type="text" name="Chapters" class="form-control form-control-lg" placeholder="Enter How Many Chapters" required />
-            </div>
-            <div class="mb-4">
-              <label for="Finished">Finished</label>
-              <input type="text" name="Finished" class="form-control form-control-lg" placeholder="Enter If You Have Finished or Not" required />
-            </div>
+    </div>
+</div>
 
-
-            <div class="mb-4 d-grid">
-              <input type="submit" name="submit" value="Add Manga" class="btn btn-primary btn-lg" />
-            </div>
-
-
-          </form>
-        </div>
-      </div>
-    </div>  
-  </div>
 <%- include('layout/footer') %>
