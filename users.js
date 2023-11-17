@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     finished: {
-        type: Boolean,
+        type: String,
         required: true,
     },
 });

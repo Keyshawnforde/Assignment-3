@@ -4,9 +4,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 
-// Assuming you have a Manga model in models/manga.js
-const Manga = require('./models/manga');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -21,12 +18,10 @@ db.once("open", () => console.log("Connected to directory!"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Commented out body-parser as it's included by default in modern Express versions
-// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'my-secret-key', // Store session secret in an environment variable
+    secret: process.env.SESSION_SECRET || 'my-secret-key', // Store session secret in variable
     saveUninitialized: true,
     resave: false
   })
